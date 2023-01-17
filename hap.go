@@ -123,7 +123,7 @@ func (e *Event[D]) addHandler(ctx context.Context, id string, fn any, size uint,
 		size: size,
 	}
 
-	// Send buffererd events every timeout.
+	// Send buffered events every timeout.
 	if fn, ok := h.fn.(func([]*D)); ok {
 		if timeout == 0 {
 			timeout = time.Second
@@ -225,6 +225,7 @@ func (e *Event[D]) Trigger(ctx context.Context, data D) {
 	}
 }
 
+// WaitForData add a convenience handler to implement synchronous event subscription.
 func (e *Event[D]) WaitForData(ctx context.Context, selector func(*D) bool) (<-chan *D, RemoveHandlerFn) {
 	dataCh := make(chan *D, 1)
 
@@ -237,6 +238,7 @@ func (e *Event[D]) WaitForData(ctx context.Context, selector func(*D) bool) (<-c
 	return dataCh, removeHandler
 }
 
+// WaitForBufferedData add a convenience handler to implement synchronous buffered event subscription.
 func (e *Event[D]) WaitForBufferedData(ctx context.Context, selector func(*D) bool, size uint, timeout time.Duration) (<-chan []*D, RemoveHandlerFn) {
 	dataCh := make(chan []*D, 1)
 
