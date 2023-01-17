@@ -181,7 +181,11 @@ func (e *Event[D]) removeHandler(h *handler[D]) {
 }
 
 // Trigger executes the registered handlers.
-func (e *Event[D]) Trigger(ctx context.Context, data D) error {
+func (e *Event[D]) Trigger(ctx context.Context, data D) {
+	if e.handlers.IsEmpty() {
+		return
+	}
+
 	for _, h := range e.handlers.Items() {
 		// Remove the handler if its context has been canceled or expired.
 		if h.ctx.Err() != nil {
@@ -219,8 +223,6 @@ func (e *Event[D]) Trigger(ctx context.Context, data D) error {
 			}
 		}(h)
 	}
-
-	return nil
 }
 
 func (e *Event[D]) WaitForData(ctx context.Context, selector func(*D) bool) (<-chan *D, RemoveHandlerFn) {
