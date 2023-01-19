@@ -37,7 +37,7 @@ func main() {
 
 	// Add handlers to the event.
 	// If you don't specify an id, a random uuid will be generated.
-	userCreatedEvent.AddHandler(
+	removeHandler := userCreatedEvent.AddHandler(
 		ctx,
 		"",
 		func(data *userCreatedEventData) {
@@ -46,6 +46,7 @@ func main() {
 			received <- struct{}{}
 		},
 	)
+	defer removeHandler()
 
 	// Trigger the event.
 	userCreatedEvent.Trigger(ctx, userCreatedEventData{
