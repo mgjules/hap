@@ -1,24 +1,3 @@
-# hap
-
-hap, like in what's `hap`pening, is a generic event system aimed towards simplicity and performance.
-
-## Goals
-
-- Simple
-- Fast
-- Type-Safe
-- Reliable
-
-## Installation
-
-```shell
-go get -u github.com/mgjules/hap
-```
-
-## Usage example
-
-examples/simple.go:
-```go
 package main
 
 import (
@@ -79,6 +58,3 @@ func main() {
 
 	<-received
 }
-```
-
-Note: You can also add buffered handlers to capture a series of events.
