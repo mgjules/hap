@@ -1,6 +1,7 @@
 # hap
 
 [![Go version](https://img.shields.io/github/go-mod/go-version/mgjules/hap.svg)](https://pkg.go.dev/github.com/mgjules/hap)
+[![hap tests](https://github.com/mgjules/hap/actions/workflows/test.yml/badge.svg)](https://github.com/mgjules/hap/actions/workflows/test.yml)
 
 hap, like in what's `hap`pening, is a generic event system aimed towards simplicity and performance.
 
